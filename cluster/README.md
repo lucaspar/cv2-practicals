@@ -35,6 +35,8 @@ qrsh -q gpu@@czajka -l gpu_card=1
 
 # your file system is now mounted in the new machine; you can
 # navigate through the files, find and run your program:
+
+conda activate cv
 python test.py
 ```
 

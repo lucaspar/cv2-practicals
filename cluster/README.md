@@ -31,7 +31,7 @@ From a front-end node you can spawn an interactive shell inside our cluster, so 
 
 ```sh
 # login to the GPU cluster
-qrsh -q gpu@@czajka -l gpu_card=1
+qrsh -q gpu@@czajka -l gpu_card=0
 
 # your file system is now mounted in the new machine; you can
 # navigate through the files, find and run your program:
@@ -52,6 +52,14 @@ qsub job_submit.sh
 
 ```sh
 qstat -u <your_nd_net_id>
+```
+
+### Terminating Jobs
+
+You can get your job ID with `qstat -u <your_nd_net_id>` and then run:
+
+```sh
+qdel <job_id>
 ```
 
 ### Execution Results

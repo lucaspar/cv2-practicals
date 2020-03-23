@@ -31,12 +31,13 @@ from skimage.color import rgb2gray
 #           ...
 #
 # generate within-class (between the same faces) and between-class comparisons. Use 'generateHistogram'
-# and 'matchHistograms' from bsif.py, i.e.:
+# and 'matchCodes' from bsif.py, i.e.:
 #
 #       import bsif
 #       ...
-#       hist = bsif.generateHistogram(...)
-#       bsif.matchHistograms(hist1,hist2)
+#       hist1, code1 = bsif.generateHistogram(...)
+#       hist2, code2 = bsif.generateHistogram(...)
+#       bsif.matchCodes(code1,code2)
 #
 # Use im1 = rgb2gray(cv2.imread(...)) to read images and convert them to grayscale. To speed up things, consider doing 
 # just one within-class comparison and one between-class comparison for randomly two different subjects.
@@ -55,7 +56,7 @@ from skimage.color import rgb2gray
 #image_domain = 'faces'
 image_domain = 'human_iris'
 
-# BSIF filters to be used:
+# BSIF filters to be used (you can try different combinations, as well):
 patch_scale = '13'
 filter_count = '12'
 filters = np.load('generated_filters' + os.path.sep + image_domain + os.path.sep + patch_scale + os.path.sep + filter_count + os.path.sep + 'filters.npy')

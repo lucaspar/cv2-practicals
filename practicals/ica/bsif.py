@@ -8,12 +8,9 @@ def generateHistogram(image,filters,patch_scale):
 
     filter_count = filters.shape[2]
 
-    #codeBinary = np.zeros((image.shape[0] - patch_scale + 1, image.shape[1] - patch_scale + 1, filter_count))
-    codeBinary = np.zeros((image.shape[0], image.shape[1], filter_count))
+    codeBinary = np.zeros((image.shape[0] - patch_scale + 1, image.shape[1] - patch_scale + 1, filter_count))
     for i in range(1,filter_count+1):
-        #ci = sg.convolve2d(image, np.rot90(filters[:,:,filter_count-i],2), mode='valid')
-        currentFilter = filters[:,:,i-1]
-        ci = cv2.filter2D(image, ddepth=cv2.CV_64F, kernel=currentFilter,delta=0,borderType=cv2.BORDER_CONSTANT)
+        ci = sg.convolve2d(image, np.rot90(filters[:,:,filter_count-i],2), mode='valid')
         codeBinary[:,:,i-1] = ci>0
 
     codeImg = np.ones((codeBinary.shape[0], codeBinary.shape[1]), np.int64)
@@ -32,8 +29,9 @@ def matchHistograms(h1,h2):
     return 0.5 * np.sum((h1 - h2)**2/( h1 + h2 + 1e-6 ))
 
 def matchCodes(code1,code2):
-    ss = 0
+    scoreC = np.zeros(code1.shape[2])
     for b in range(code1.shape[2]):
         xorCodes = np.logical_xor(code1[:,:,b], code2[:,:,b])
-        ss = ss + np.sum(xorCodes)
-        return ss / (code1.shape[0]*code1.shape[1]*code1.shape[2])
+        scoreC[b] = np.sum(xorCodes) / (code1.shape[0]*code1.shape[1])
+        
+    return np.mean(scoreC)

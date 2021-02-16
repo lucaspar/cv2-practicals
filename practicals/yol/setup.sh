@@ -24,7 +24,7 @@ conda activate "$ENV_NAME"
 
 # install dependencies
 echo " >>> Installing deps..."
-# conda install -y -c conda-forge opencv
+conda install -y -c conda-forge opencv
 
 # run the checking script
 echo " >>> Running system check..."

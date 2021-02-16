@@ -22,7 +22,7 @@ Location                        | Description
 
 It's better to create a different virtual environment for each practical to avoid version conflicts. The file structure helps you remember the environment name:
 
-```sh
+```bash
 # set the practical ID, which is the directory name (e.g. yol)
 PRACTICAL_ID=yol
 VENV=cv2-$PRACTICAL_ID
@@ -40,7 +40,7 @@ conda env list
 
 Alternatively, you can set up an alias to automatically activate the environment of your working directory.
 
-```
+```bash
 # add it to your `~/.bashrc`:
 alias cacv='conda activate cv-`basename \$PWD`'
 ```

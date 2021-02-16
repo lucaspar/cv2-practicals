@@ -5,6 +5,7 @@ import time
 import torch
 import tensorflow as tf
 
+
 print(" >> Python version:\t", sys.version)
 print(" >> Tensorflow version:\t", tf.__version__)
 print(" >> PyTorch version:\t", torch.__version__)
@@ -15,8 +16,7 @@ for d in range(torch.cuda.device_count()):
     print("\tGPU {}: {}".format(d, torch.cuda.get_device_name(d)))
 
 #print(tf.test.gpu_device_name())
-
-sleeptime = 20
+sleeptime = 10
 print("Sleeping {}s...".format(sleeptime))
 time.sleep(sleeptime)
 

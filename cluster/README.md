@@ -12,7 +12,7 @@ ssh -CY $NETID@crcfe02.crc.nd.edu
 
 ### Installing Dependencies
 
-Your file system is mounted on the machine to where you will submit the jobs, so you can prepare your environment on the front-end node (e.g. `crcfe02.crc.nd.edu`) and later submit the job to our cluster `qa-rtx6k-017.crc.nd.edu` (a.k.a. `gpu@@czajka`).
+Your file system is mounted on the machine to where you will submit the jobs, so you can prepare your environment on the front-end node (e.g. `crcfe02.crc.nd.edu`) and later submit the job to a GPU cluster.
 
 Take a look at `prep_env.sh`. You can run this script to create and prepare a conda environment that you will later use to run your program. You only need to run it once (unless you add more dependencies to your project).
 
@@ -30,8 +30,8 @@ From a front-end node you can spawn an interactive shell inside our cluster, so 
 > Train by submitting a job to the queue (see below).
 
 ```sh
-# login to the GPU cluster
-qrsh -q gpu@@czajka -l gpu_card=0
+# login into a GPU cluster
+qrsh -q gpu -l gpu_card=0
 
 # your file system is now mounted in the new machine; you can
 # navigate through the files, find and run your program:
@@ -51,22 +51,22 @@ qsub job_submit.sh
 ### Checking Job Status
 
 ```sh
-qstat -u <your_nd_net_id>
+qstat -u $USER
 ```
 
 ### Terminating Jobs
 
-You can get your job ID with `qstat -u <your_nd_net_id>` and then run:
+You can get your job ID with `qstat -u $USER` and then run:
 
 ```sh
-qdel <job_id>
+qdel <JOB_ID>
 ```
 
 ### Execution Results
 
 When you submit your job, you will see a file named like `my_job.o772071` with the outputs of your execution. If this file is empty, wait until your execution is finished.
 
-The outputs of `qsub job_submit.sh` should look like this:
+The outputs of `qsub job_submit.sh` should look like this (you can ignore the "command not found errors"):
 
 ```sh
 (cv) crcfe01:/…vate/demos/cv2 » more my_job.o772071
@@ -91,10 +91,16 @@ Finished execution!
 ### Check disk storage
 
 ```sh
+# AFS space
 quota
 # Quota for /afs/crc.nd.edu/user/n/netid
 # Volume Name                   Quota      Used %Used   Partition
 # u.netid                     1500 GB     15 GB    1%         30%
+
+# Scratch space
+pan_df -H /scratch365/$USER
+# Filesystem             Size   Used  Avail Use% Mounted on
+# panfs://10.0.0.1/      1.0T   215G   786G  21% /scratch365/NETID
 ```
 
 ### Mounting CRC drive locally

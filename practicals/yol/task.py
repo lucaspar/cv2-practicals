@@ -37,12 +37,12 @@ while True:
     *** Step 1: normalize input frame: use cv.dnn.blobFromImage(image[, scalefactor[, size[, mean[, swapRB[, crop[, ddepth]]]]]] to create a "blob" from image.
     Hints:
     -- scale the frame to something small, e.g. (220,220), for YOLOv3-tiny
-    -- scale the frame to (320,320) for YOLOv3 
+    -- scale the frame to (320,320) for YOLOv3
     -- scale value of input images to the 0-1 range (from 0-255 range)
     -- we do not subtract mean from input images
     -- we need to swap R and B channels
     -- we don't need to crop after resize
-    
+
     blob = ...
 
     '''
@@ -53,7 +53,7 @@ while True:
     *** Step 2: use cv.dnn_Net.setInput(blob[, name[, scalefactor[, mean]]]) to put your frame on the network's input.
     Hint:
     -- we no longer need to normalize the brightness
-    
+
     '''
 
 
@@ -68,8 +68,8 @@ while True:
 
 
     '''
-    *** Step 4: The detection is done! The only thing to do is to display the results. 
-    
+    *** Step 4: The detection is done! The only thing to do is to display the results.
+
     Hints:
 
     Start with these lines:
@@ -84,17 +84,17 @@ while True:
             class_id = np.argmax(scores)
             confidence = scores[class_id]
 
-            Now for this particular object we have its class ID and confidence. 
-            But we want to ignore objects with low detection confidence. Thus, in the next lines 
+            Now for this particular object we have its class ID and confidence.
+            But we want to ignore objects with low detection confidence. Thus, in the next lines
             process only those objects that have confidence higher than some threshold (e.g., 0.2).
 
             ...
 
             We may now calculate its box coordinates (x,y,w,h) multiplying values in "detection" vector by the frame width and height:
-    
+
             detection[0] corresponds to X center
             detection[1] corresponds to Y center
-            detection[2] corresponds to the box width, and 
+            detection[2] corresponds to the box width, and
             detection[3] corresponds to the box height
 
             ...
@@ -104,7 +104,7 @@ while True:
             boxes.append([x, y, w, h])
             confidences.append(float(confidence))
             class_ids.append(class_id)
-    
+
     '''
 
 
@@ -121,7 +121,7 @@ while True:
     indices = cv.dnn.NMSBoxes(...
 
     '''
-    
+
 
 
     '''
@@ -131,13 +131,13 @@ while True:
 
     for i in range(len(boxes)):
         if i in indices:
-        
+
         Hints:
         -- boxes' indices are in boxes[i]
         -- str(classes[class_ids[i]]) will give you the class label
         -- confidences[i] will give you the confidence score
         -- and you can use colors[class_ids[i]] for a box color
-        
+
         Use "cv2.rectangle" and "cv2.text" to add the detection results to the "frame"
 
     '''

@@ -66,23 +66,21 @@ qdel <JOB_ID>
 
 When you submit your job, you will see a file named like `my_job.o772071` with the outputs of your execution. If this file is empty, wait until your execution is finished.
 
-The outputs of `qsub job_submit.sh` should look like this (you can ignore the "command not found errors"):
+The outputs of `qsub job_submit.sh` should look like this:
 
 ```sh
 (cv) crcfe01:/…vate/demos/cv2 » more my_job.o772071
 
- >> Running on qa-rtx6k-017.crc.nd.edu
-/opt/sge/crc/spool/qa-rtx6k-017/job_scripts/772071: line 16: module: command not found
-/opt/sge/crc/spool/qa-rtx6k-017/job_scripts/772071: line 19: conda: command not found
- >> Python version:	     3.6.10 |Anaconda, Inc.| (default, Jan  7 2020, 21:14:29)
+>> Running on qa-xp-013.crc.nd.edu
+>> Python version:      3.6.10 |Anaconda, Inc.| (default, Jan  7 2020, 21:14:29)
 [GCC 7.3.0]
- >> Tensorflow version:	 2.1.0
- >> PyTorch version:	 1.4.0
- >> OpenCV version:	     3.4.2
+>> Tensorflow version:  2.1.0
+>> PyTorch version:     1.4.0
+>> OpenCV version:      3.4.2
 
- >> CUDA available?	True
-	GPU 0: Quadro RTX 6000
-Sleeping 20s...
+>> CUDA available?     True
+        GPU 0: TITAN Xp
+Sleeping 10s...
 Finished execution!
 ```
 

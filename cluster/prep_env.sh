@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
 
-# enable cluster anaconda
-module load conda
-
-# prepare shell for anaconda
-conda init $(ps -o comm= -p $$)
-source ~/.bashrc
-
 # create conda environment
 conda create -n cv python=3.6
 conda activate cv

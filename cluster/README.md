@@ -116,24 +116,37 @@ mkdir -p $MOUNTPOINT
 
 # mount file system
 sshfs -C $NETID@crcfe02.crc.nd.edu:/ $MOUNTPOINT
+```
 
-# navigate to user home
-cd $MOUNTPOINT/afs/crc.nd.edu/user/$initial/$NETID/
+> Tip: You can create a function in your `.bashrc` with the code above to easily mount CRC FS in the future.
+
+Then create an accessible symbolic link to your CRC home:
+
+```bash
+ln -s $MOUNTPOINT/afs/crc/user/$initial/$NETID ~/crc
+cd ~/crc
 ```
 
 ### Version Control
 
-Upon mounting, you can easily do things like Git version control:
+Upon mounting, you can easily work by running processes on your local machine:
 
 ```sh
 # from your local machine, mount the CRC drive and run:
-cd $MOUNTPOINT/afs/crc.nd.edu/user/$initial/$NETID/Private/
-git clone git@github.com:username/project.git my_project
+cd ~/crc/Private/
 
-# then you can open the repository with your
+# git has your credentials, since you're running it locally
+git clone <remote_url> my_project
+
 # text editor / IDE of choice (e.g. VS Code):
 code my_project
 
 ```
 
-Now code changes are visible to CRC machines in real time.
+Now your "local" file changes are visible to CRC machines in real time,
+and any processes that you start will run locally too, resulting in
+significantly less latency.
+
+However, if you're running code with a lot of IO operations
+(like loading a dataset), it's still better to log into CRC
+and avoid the file transfers over the network
